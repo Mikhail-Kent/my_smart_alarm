@@ -1,17 +1,19 @@
 workflows:
-  ios_unsigned:
-    name: Build iOS unsigned (no signing)
+  build-ios-unsigned:
+    name: Build iOS (unsigned)
     environment:
       flutter: stable
       xcode: latest
     scripts:
-      - name: Get Flutter packages
+      - name: Install dependencies
         script: flutter pub get
-      - name: Build iOS device app (no codesign)
-        # flutter build ios --no-codesign часто создаёт build/ios/iphoneos/Runner.app
-        # Мы запускаем эту команду и затем упакуем .app в .ipa на Windows
+      - name: Build iOS (no codesign)
         script: |
           flutter build ios --release --no-codesign
     artifacts:
-      - build/ios/iphoneos/Runner.app
+      - build/ios/iphoneos/*.app
       - build/ios/ipa/*.ipa
+    publishing:
+      email:
+        recipients:
+          - misha2008200@gmail.com
