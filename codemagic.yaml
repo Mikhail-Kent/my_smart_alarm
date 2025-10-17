@@ -1,6 +1,7 @@
 workflows:
   build-ios-unsigned:
     name: Build iOS (unsigned)
+    max_build_duration: 60
     environment:
       flutter: stable
       xcode: latest
@@ -8,10 +9,8 @@ workflows:
       - name: Install dependencies
         script: flutter pub get
       - name: Build iOS (no codesign)
-        script: |
-          flutter build ios --release --no-codesign
+        script: flutter build ipa --release --no-codesign
     artifacts:
-      - build/ios/iphoneos/*.app
       - build/ios/ipa/*.ipa
     publishing:
       email:
