@@ -1,6 +1,7 @@
 name: my_smart_alarm
-description: Smart Alarm — demo app (no extra fonts)
-publish_to: "none"
+description: A new Flutter project
+publish_to: 'none'
+version: 1.0.0+1  # <- ОБЯЗАТЕЛЬНО!
 
 environment:
   sdk: ">=3.0.0 <4.0.0"
