@@ -1,14 +1,17 @@
 workflows:
-  ios-simulator-build:
-    name: Build iOS app for Simulator (no signing)
+  ios_unsigned:
+    name: Build iOS unsigned (no signing)
     environment:
       flutter: stable
       xcode: latest
     scripts:
-      - name: Get dependencies
+      - name: Get Flutter packages
         script: flutter pub get
-      - name: Build for iOS simulator
+      - name: Build iOS device app (no codesign)
+        # flutter build ios --no-codesign часто создаёт build/ios/iphoneos/Runner.app
+        # Мы запускаем эту команду и затем упакуем .app в .ipa на Windows
         script: |
-          flutter build ios --simulator --release
+          flutter build ios --release --no-codesign
     artifacts:
-      - build/ios/iphonesimulator/**/*.app
+      - build/ios/iphoneos/Runner.app
+      - build/ios/ipa/*.ipa
