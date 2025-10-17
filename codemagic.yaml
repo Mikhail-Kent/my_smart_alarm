@@ -1,17 +1,14 @@
 workflows:
-  build_ios:
-    name: Build iOS App
-    max_build_duration: 60
+  ios-simulator-build:
+    name: Build iOS app for Simulator (no signing)
     environment:
       flutter: stable
       xcode: latest
-      vars:
-        APP_NAME: "first_app"
     scripts:
-      - name: Get Flutter packages
+      - name: Get dependencies
         script: flutter pub get
-      - name: Build iOS IPA
-        script: flutter build ios --release --no-codesign
+      - name: Build for iOS simulator
+        script: |
+          flutter build ios --simulator --release
     artifacts:
-      - build/ios/ipa/*.ipa
-      - build/ios/iphoneos/*.app
+      - build/ios/iphonesimulator/**/*.app
