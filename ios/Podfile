@@ -1,19 +1,13 @@
 platform :ios, '14.0'
 
-ENV['COCOAPODS_DISABLE_STATS'] = 'true'
-
-project 'Runner', {
-  'Debug' => :debug,
-  'Profile' => :release,
-  'Release' => :release,
-}
-
-flutter_root = File.expand_path(File.join('..', '..'))
-load File.join(flutter_root, 'packages', 'flutter_tools', 'bin', 'podhelper.rb')
-
 target 'Runner' do
   use_frameworks!
   use_modular_headers!
 
-  flutter_install_all_ios_pods File.dirname(File.realpath(__FILE__))
+  # Добавляем плагины Flutter вручную
+  pod 'health', :path => '../.symlinks/plugins/health/ios'
+  pod 'permission_handler', :path => '../.symlinks/plugins/permission_handler/ios'
+  pod 'just_audio', :path => '../.symlinks/plugins/just_audio/ios'
+  pod 'record', :path => '../.symlinks/plugins/record/ios'
+
 end
