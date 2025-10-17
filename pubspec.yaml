@@ -38,3 +38,24 @@ flutter:
 
   assets:
     - assets/sounds/wake_tone.mp3
+
+
+workflows:
+  build-ios-unsigned:
+    name: Build iOS (unsigned)
+    environment:
+      flutter: stable
+      xcode: latest
+    scripts:
+      - name: Install dependencies
+        script: flutter pub get
+      - name: Build iOS (no codesign)
+        script: |
+          flutter build ios --release --no-codesign
+    artifacts:
+      - build/ios/iphoneos/*.app
+      - build/ios/ipa/*.ipa
+    publishing:
+      email:
+        recipients:
+          - misha2008200@gmail.com
